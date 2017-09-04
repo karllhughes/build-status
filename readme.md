@@ -8,10 +8,21 @@ This project is intended to be run in [Docker containers](https://www.docker.com
 
 - Clone the repository from Github.
 - Copy the `.env.example` file to `.env` and add your Codeship login credentials.
-- Build the Docker image: `docker build -t karllhughes/build-status .`. You can also use the short command if you have NPM installed locally: `npm run build`.
-- Start a new container: `docker run --rm -it -p 3000:3000 -v $(pwd)/controllers:/app/controllers -v $(pwd)/views:/app/views -v $(pwd)/clients:/app/clients --env-file .env karllhughes/build-status`. You can also use the NPM command: `npm start`.
+- Build the Docker image: `docker build -t karllhughes/build-status .`.
+  - *You can also use the short command if you have NPM installed locally: `npm run build`.*
+  - *You can also simply pull the latest image from Docker Hub: `docker pull karllhughes/build-status`.*
+- Start a new container: `docker run --rm -it -p 3000:3000 -v $(pwd)/controllers:/app/controllers -v $(pwd)/views:/app/views -v $(pwd)/clients:/app/clients --env-file .env karllhughes/build-status`.
+  - *You can also use the NPM command: `npm start`.*
 
 The application will be running on `localhost:3000`.
+
+## Server Setup
+
+This process will vary depending on how you host your containers. As this is a simple project, I have hosted it at [builds.khughes.me](https://builds.khughes.me/) using [Hyper.sh](https://hyper.sh/). The basic process goes something like this:
+
+- Build the project and push to a container registry.
+- Pull the latest version of the image from the container registry to your server.
+- Run the application with your environmental variables set. The command will look something like: `docker run -d --restart always -p 80:3000 --env-file .env karllhughes/build-status`.
 
 ## Contributing
 
