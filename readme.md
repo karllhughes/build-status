@@ -23,6 +23,8 @@ This process will vary depending on how you host your containers. As this is a s
 - Build the project and push to a container registry.
 - Pull the latest version of the image from the container registry to your server.
 - Run the application with your environmental variables set. The command will look something like: `docker run -d --restart always -p 80:3000 --env-file .env karllhughes/build-status`.
+  - In Hyper.sh, the command I run is `hyper run -d --restart always -p 80:3000 --env-file .env --name build-status --size=s3 karllhughes/build-status`.
+  - Then I attach an IP: `hyper fip attach XXX.XXX.XX.XXX build-status`.
 
 ## Contributing
 
