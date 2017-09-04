@@ -1,0 +1,54 @@
+<section id="projects">
+  {{#each projects}}
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-2 build-status-icon">
+          {{#ifEquals this.builds.0.status "success"}}
+            <i class="fa fa-check-circle success" aria-hidden="true"></i>
+          {{/ifEquals}}
+          {{#ifEquals this.builds.0.status "waiting"}}
+            <i class="fa fa-clock-o testing" aria-hidden="true"></i>
+          {{/ifEquals}}
+          {{#ifEquals this.builds.0.status "testing"}}
+            <i class="fa fa-clock-o testing" aria-hidden="true"></i>
+          {{/ifEquals}}
+          {{#ifEquals this.builds.0.status "failed"}}
+            <i class="fa fa-times-circle failed" aria-hidden="true"></i>
+          {{/ifEquals}}
+          {{#ifEquals this.builds.0.status "stopping"}}
+          <i class="fa fa-times-circle failed" aria-hidden="true"></i>
+          {{/ifEquals}}
+          {{#ifEquals this.builds.0.status "stopped"}}
+          <i class="fa fa-times-circle failed" aria-hidden="true"></i>
+          {{/ifEquals}}
+        </div>
+        <div class="col-sm-10">
+          <h4 class="card-title"><a href="/projects/{{ this.uuid }}">{{ this.name }}</a></h4>
+          <p class="card-text">
+            <strong>Commit Message:</strong> {{ this.builds.0.commit_message }}<br/>
+            <strong>Status:</strong>
+            <span style="text-transform: capitalize">{{ this.builds.0.status }}</span>
+            <br/>
+            {{#if this.builds.0.finished_at}}
+            <strong>Built at:</strong> {{ this.builds.0.finished_at }}
+            {{else}}
+            {{#if this.builds.0.queued_at}}
+            <strong>Queued at:</strong> {{ this.builds.0.queued_at }}
+            {{/if}}
+            {{/if}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <a href="/projects/{{ this.uuid }}" class="card-link">
+        Builds
+      </a>
+      <a href="{{ this.repository_url }}" target="_blank" class="card-link">
+        {{ this.repository_provider }}
+      </a>
+    </div>
+  </div>
+  {{/each}}
+</section>
