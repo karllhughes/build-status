@@ -7,6 +7,7 @@ let authorization;
 
 async function postAuth() {
   if (accessTokenExpired()) {
+    console.log("Getting new authorization token");
     authorization = await request({
       uri: apiUrl + '/auth',
       method: 'POST',
@@ -21,7 +22,8 @@ async function postAuth() {
   return authorization;
 }
 
-function getProject(organizationId, projectId) {
+async function getProject(organizationId, projectId) {
+  console.log("Getting project #" + projectId);
   return request({
     uri: apiUrl + '/organizations/' + organizationId + '/projects/' + projectId,
     method: 'GET',
@@ -34,6 +36,7 @@ function getProject(organizationId, projectId) {
 }
 
 function listProjects(organizationId) {
+  console.log("Getting projects");
   return request({
     uri: apiUrl + '/organizations/' + organizationId + '/projects',
     method: 'GET',
@@ -46,6 +49,7 @@ function listProjects(organizationId) {
 }
 
 function listBuilds(organizationId, projectId) {
+  console.log("Getting builds for project #" + projectId);
   return request({
     uri: apiUrl + '/organizations/' + organizationId + '/projects/' + projectId + '/builds',
     method: 'GET',

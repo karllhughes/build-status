@@ -11,7 +11,7 @@ This project is intended to be run in [Docker containers](https://www.docker.com
 - Build the Docker image: `docker build -t karllhughes/build-status .`.
   - *You can also use the short command if you have NPM installed locally: `npm run build`.*
   - *You can also simply pull the latest image from Docker Hub: `docker pull karllhughes/build-status`.*
-- Start a new container: `docker run --rm -it -p 3000:3000 -v $(pwd)/controllers:/app/controllers -v $(pwd)/views:/app/views -v $(pwd)/clients:/app/clients --env-file .env karllhughes/build-status`.
+- Start a new container: `docker run --rm -it -p 3000:3000 -v $(pwd)/controllers:/app/controllers -v $(pwd)/views:/app/views -v $(pwd)/clients:/app/clients -v $(pwd)/data-access:/app/data-access --env-file .env karllhughes/build-status`.
   - *You can also use the NPM command: `npm start`.*
 
 The application will be running on `localhost:3000`.
@@ -22,8 +22,8 @@ This process will vary depending on how you host your containers. As this is a s
 
 - Build the project and push to a container registry.
 - Pull the latest version of the image from the container registry to your server.
-- Run the application with your environmental variables set. The command will look something like: `docker run -d --restart always -p 80:3000 --env-file .env karllhughes/build-status`.
-  - In Hyper.sh, the command I run is `hyper run -d --restart always -p 80:3000 --env-file .env --name build-status --size=s3 karllhughes/build-status`.
+- Run the application with your environmental variables set. The command will look something like: `docker run -d --restart always -p 80:3000 --env-file .env karllhughes/build-status node index.js`.
+  - In Hyper.sh, the command I run is `hyper run -d --restart always -p 80:3000 --env-file .env --name build-status --size=s2 karllhughes/build-status node index.js`.
   - Then I attach an IP: `hyper fip attach XXX.XXX.XX.XXX build-status`.
 
 ## Contributing

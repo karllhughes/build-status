@@ -9,7 +9,7 @@ const handlebars = exphbs.create({
   defaultLayout: 'main',
   helpers: {
     ifEquals: function (arg1, arg2, options) {
-      return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+      return (arg1 === arg2) ? options.fn(this) : options.inverse(this);
     },
   },
 });
@@ -22,5 +22,5 @@ app.get('/projects/:project_id', projects.single);
 
 // Run the application
 app.listen(3000, () => {
-  console.log('Example app listening on port 3000');
+  console.log('Listening on port 3000');
 });

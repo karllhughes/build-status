@@ -1,18 +1,15 @@
 'use strict';
 const apiClient = require('../clients/codeship-api');
+const getProject = require('../data-access/getProject');
+const getProjects = require('../data-access/getProjects');
 
 async function list(req, res) {
   const authorization = await apiClient.postAuth();
   const orgId = authorization.organizations[0].uuid;
 
-  let projects = (await apiClient.listProjects(orgId)).projects;
+  const projects = await getProjects(orgId);
 
-  projects = await Promise.all(projects.map(async (project) => {
-    project.builds = (await apiClient.listBuilds(orgId, project.uuid)).builds;
-    return project;
-  }));
-
-  res.render('list', {projects: projects});
+  res.render('list', { projects: projects });
 }
 
 async function single(req, res) {
@@ -20,9 +17,7 @@ async function single(req, res) {
   const orgId = authorization.organizations[0].uuid;
   const projectId = req.params['project_id'];
 
-  let project = (await apiClient.getProject(orgId, projectId)).project;
-
-  project.builds = (await apiClient.listBuilds(orgId, projectId)).builds;
+  const project = await getProject(orgId, projectId);
 
   res.render('single', { project: project});
 }
