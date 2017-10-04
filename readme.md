@@ -1,6 +1,6 @@
 # Codeship Build Status
 
-This project displays the status of your Codeship Pro builds to the public via a Node Express app. It uses the new Codeship verson 2 API.
+This project displays the status of your Codeship Pro builds to the public via a Node Express app. It uses the new Codeship verson 2 API, and is outlined in detail in [this blog post on Codeship](https://blog.codeship.com/creating-a-custom-build-status-page-using-codeship-api-v2/).
  
 ## Local Setup
 
