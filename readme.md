@@ -18,13 +18,7 @@ The application will be running on `localhost:3000`.
 
 ## Server Setup
 
-This process will vary depending on how you host your containers. As this is a simple project, I have hosted it at [builds.khughes.me](https://builds.khughes.me/) using [Hyper.sh](https://hyper.sh/). The basic process goes something like this:
-
-- Build the project and push to a container registry.
-- Pull the latest version of the image from the container registry to your server.
-- Run the application with your environmental variables set. The command will look something like: `docker run -d --restart always -p 80:3000 --env-file .env karllhughes/build-status node index.js`.
-  - In Hyper.sh, the command I run is `hyper run -d --restart always -p 80:3000 --env-file .env --name build-status --size=s2 karllhughes/build-status node index.js`.
-  - Then I attach an IP: `hyper fip attach XXX.XXX.XX.XXX build-status`.
+This process will vary depending on how you host your containers. As this is a simple project, I have hosted it at [builds.pcto.co](https://builds.pcto.co/) using [Rancher](https://rancher.com/docs/rancher/v2.x/en/). I still need to write better instructions here...
 
 ## Contributing
 
